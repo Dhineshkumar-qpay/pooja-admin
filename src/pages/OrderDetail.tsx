@@ -11,10 +11,10 @@ import { authService, IMAGE_BASE_URL } from '../services/api';
 const ORDER_STATUSES = ['pending', 'confirmed', 'packed', 'shipped', 'delivered', 'cancelled'];
 
 const STATUS_ICONS: Record<string, React.ReactNode> = {
-  pending:   <Clock className="h-3.5 w-3.5" />,
+  pending: <Clock className="h-3.5 w-3.5" />,
   confirmed: <CheckCircle2 className="h-3.5 w-3.5" />,
-  packed:    <Package className="h-3.5 w-3.5" />,
-  shipped:   <Truck className="h-3.5 w-3.5" />,
+  packed: <Package className="h-3.5 w-3.5" />,
+  shipped: <Truck className="h-3.5 w-3.5" />,
   delivered: <ShoppingBag className="h-3.5 w-3.5" />,
   cancelled: <XCircle className="h-3.5 w-3.5" />,
 };
@@ -22,10 +22,10 @@ const STATUS_ICONS: Record<string, React.ReactNode> = {
 export const OrderDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  
+
   const [orderData, setOrderData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const [orderStatus, setOrderStatus] = useState('');
   const [saved, setSaved] = useState(false);
 
@@ -78,10 +78,10 @@ export const OrderDetail: React.FC = () => {
   const statusIndex = ORDER_STATUSES.indexOf(orderStatus);
   const isCancelled = orderStatus === 'cancelled';
 
-  const handleSave = () => { 
+  const handleSave = () => {
     // Usually you'd call an API here like: await authService.updateOrderStatus(order.orderid, orderStatus)
-    setSaved(true); 
-    setTimeout(() => setSaved(false), 2500); 
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
   };
 
   return (
@@ -121,25 +121,22 @@ export const OrderDetail: React.FC = () => {
             return (
               <React.Fragment key={s}>
                 <div className="flex flex-col items-center gap-2 flex-shrink-0">
-                  <div className={`h-9 w-9 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-                    done
-                      ? 'bg-gradient-to-br from-saffron-500 to-temple-gold-500 border-temple-gold-400 shadow-md shadow-temple-gold-200'
-                      : 'bg-white border-dark-brown-200'
-                  } ${current ? 'ring-4 ring-saffron-100' : ''}`}>
+                  <div className={`h-9 w-9 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${done
+                    ? 'bg-gradient-to-br from-saffron-500 to-temple-gold-500 border-temple-gold-400 shadow-md shadow-temple-gold-200'
+                    : 'bg-white border-dark-brown-200'
+                    } ${current ? 'ring-4 ring-saffron-100' : ''}`}>
                     <span className={done ? 'text-white' : 'text-dark-brown-300'}>
                       {STATUS_ICONS[s]}
                     </span>
                   </div>
-                  <span className={`text-xs font-medium whitespace-nowrap capitalize ${
-                    done ? 'text-saffron-600' : 'text-dark-brown-300'
-                  }`}>{s}</span>
+                  <span className={`text-xs font-medium whitespace-nowrap capitalize ${done ? 'text-saffron-600' : 'text-dark-brown-300'
+                    }`}>{s}</span>
                 </div>
                 {!isLast && (
-                  <div className={`flex-1 h-0.5 mt-4 mx-1 rounded-full transition-all duration-500 ${
-                    !isCancelled && ORDER_STATUSES.indexOf(arr[i + 1]) <= statusIndex
-                      ? 'bg-gradient-to-r from-saffron-500 to-temple-gold-400'
-                      : 'bg-dark-brown-100'
-                  }`} />
+                  <div className={`flex-1 h-0.5 mt-4 mx-1 rounded-full transition-all duration-500 ${!isCancelled && ORDER_STATUSES.indexOf(arr[i + 1]) <= statusIndex
+                    ? 'bg-gradient-to-r from-saffron-500 to-temple-gold-400'
+                    : 'bg-dark-brown-100'
+                    }`} />
                 )}
               </React.Fragment>
             );
@@ -232,11 +229,10 @@ export const OrderDetail: React.FC = () => {
                 <button
                   key={s}
                   onClick={() => { setOrderStatus(s); setSaved(false); }}
-                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium border transition-all capitalize ${
-                    orderStatus === s
-                      ? 'bg-gradient-to-r from-saffron-600 to-temple-gold-500 text-white border-transparent shadow-md shadow-saffron-200'
-                      : 'bg-white text-dark-brown-600 border-dark-brown-200 hover:border-saffron-300 hover:text-saffron-600 hover:bg-saffron-50'
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium border transition-all capitalize ${orderStatus === s
+                    ? 'bg-gradient-to-r from-saffron-600 to-temple-gold-500 text-white border-transparent shadow-md shadow-saffron-200'
+                    : 'bg-white text-dark-brown-600 border-dark-brown-200 hover:border-saffron-300 hover:text-saffron-600 hover:bg-saffron-50'
+                    }`}
                 >
                   <span className={orderStatus === s ? 'text-white' : 'text-dark-brown-400'}>{STATUS_ICONS[s]}</span>
                   {s}
@@ -268,8 +264,8 @@ export const OrderDetail: React.FC = () => {
             </div>
             <div className="p-5 space-y-4">
               <div>
-                <p className="text-sm font-bold text-dark-brown-900">{address.firstname} {address.lastname}</p>
-                <p className="text-sm text-dark-brown-500 mt-1">{address.phone}</p>
+                <p className="text-sm font-bold text-dark-brown-900">{address?.firstname || 'Unknown'} {address?.lastname || ''}</p>
+                <p className="text-sm text-dark-brown-500 mt-1">{address?.phone || 'No phone'}</p>
               </div>
             </div>
           </div>
@@ -281,10 +277,10 @@ export const OrderDetail: React.FC = () => {
             <div className="p-5 flex gap-3">
               <MapPin className="h-4 w-4 text-saffron-500 shrink-0 mt-0.5" />
               <p className="text-sm text-dark-brown-700 leading-relaxed">
-                {address.addressline1}<br />
-                {address.addressline2 && <>{address.addressline2}<br /></>}
-                {address.city}, {address.state} - {address.pincode}<br />
-                {address.country}
+                {address?.addressline1 || 'No address line 1'}<br />
+                {address?.addressline2 && <>{address.addressline2}<br /></>}
+                {address?.city || 'Unknown'}, {address?.state || 'Unknown'} - {address?.pincode || '000000'}<br />
+                {address?.country || 'Unknown'}
               </p>
             </div>
           </div>

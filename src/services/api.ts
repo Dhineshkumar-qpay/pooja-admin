@@ -140,7 +140,7 @@ export const authService = {
     return response.data;
   },
   getOrderDetail: async (orderid: string) => {
-    const response = await api.post('/orders/details', { orderid });
+    const response = await api.post('/orders/admin-details', { orderid });
     return response.data;
   },
 };
