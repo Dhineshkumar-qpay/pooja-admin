@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-saffron-50: #fff8f1;
+  --color-saffron-100: #ffeedb;
+  --color-saffron-200: #ffd5af;
+  --color-saffron-300: #ffb67b;
+  --color-saffron-400: #ff8c40;
+  --color-saffron-500: #ff6a0d;
+  --color-saffron-600: #f05000;
+  --color-saffron-700: #c73a02;
+  --color-saffron-800: #9e2e0a;
+  --color-saffron-900: #7f280b;
+
+  --color-temple-gold-50: #fbf9ec;
+  --color-temple-gold-100: #f5f0cf;
+  --color-temple-gold-200: #ede09f;
+  --color-temple-gold-300: #e3ca66;
+  --color-temple-gold-400: #dcb336;
+  --color-temple-gold-500: #d49822;
+  --color-temple-gold-600: #b57319;
+  --color-temple-gold-700: #905317;
+  --color-temple-gold-800: #774319;
+  --color-temple-gold-900: #653718;
+
+  --color-ivory-50: #ffffff;
+  --color-ivory-100: #fffffc;
+  --color-ivory-200: #fffff0;
+  --color-ivory-300: #fdfae3;
+  --color-ivory-400: #f9f3cc;
+  --color-ivory-500: #f3e8a9;
+
+  --color-dark-brown-50: #f6f4f2;
+  --color-dark-brown-100: #eae4df;
+  --color-dark-brown-200: #d4c8bf;
+  --color-dark-brown-300: #b5a195;
+  --color-dark-brown-400: #967d6e;
+  --color-dark-brown-500: #7e6353;
+  --color-dark-brown-600: #674c3e;
+  --color-dark-brown-700: #543d32;
+  --color-dark-brown-800: #46342b;
+  --color-dark-brown-900: #3a2b25;
+
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-ivory-50);
+    --foreground: var(--color-dark-brown-900);
+    --card: #ffffff;
+    --card-foreground: var(--color-dark-brown-900);
+    --border: var(--color-dark-brown-200);
+    --primary: var(--color-saffron-600);
+    --primary-foreground: #ffffff;
+    --muted: var(--color-ivory-100);
+    --muted-foreground: var(--color-dark-brown-500);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
