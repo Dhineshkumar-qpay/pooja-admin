@@ -20,7 +20,6 @@ import { ContactUs } from "./pages/ContactUs";
 import { Banners } from "./pages/Banners";
 import { AddBanner } from "./pages/AddBanner";
 import { ProductReviews } from "./pages/ProductReviews";
-import { Reports } from "./pages/Reports";
 
 function App() {
   return (
@@ -49,7 +48,6 @@ function App() {
           <Route path="contact" element={<ContactUs />} />
           <Route path="banners" element={<Banners />} />
           <Route path="banners/add" element={<AddBanner />} />
-          <Route path="reports" element={<Reports />} />
           <Route path="settings" element={<Settings />} />
           <Route
             path="*"

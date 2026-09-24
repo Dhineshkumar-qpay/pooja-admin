@@ -34,7 +34,6 @@ const navItems = [
   },
   { name: "Contact Us", path: "/admin/contact", icon: PhoneCall },
   { name: "Banners", path: "/admin/banners", icon: Image },
-  { name: "Reports", path: "/admin/reports", icon: BarChart3 },
   { name: "Settings", path: "/admin/settings", icon: Settings },
 ];
 
@@ -55,9 +54,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-30 w-64 bg-gradient-to-b from-dark-brown-900 to-dark-brown-800 border-r border-dark-brown-800 flex flex-col h-full transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:shadow-2xl ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-y-0 left-0 z-30 w-64 bg-gradient-to-b from-dark-brown-900 to-dark-brown-800 border-r border-dark-brown-800 flex flex-col h-full transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:shadow-2xl ${isOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="h-16 flex items-center px-6 border-b border-dark-brown-700/50 shrink-0">
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-saffron-500 to-temple-gold-500 flex items-center justify-center mr-3 shadow-sm">
@@ -77,10 +75,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                 to={item.path}
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
-                  `group flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 ${
-                    isActive
-                      ? "bg-gradient-to-r from-saffron-600 to-temple-gold-500 text-white shadow-md border border-temple-gold-500/30"
-                      : "text-dark-brown-300 hover:bg-dark-brown-800/50 hover:text-white border border-transparent"
+                  `group flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 ${isActive
+                    ? "bg-gradient-to-r from-saffron-600 to-temple-gold-500 text-white shadow-md border border-temple-gold-500/30"
+                    : "text-dark-brown-300 hover:bg-dark-brown-800/50 hover:text-white border border-transparent"
                   }`
                 }
               >

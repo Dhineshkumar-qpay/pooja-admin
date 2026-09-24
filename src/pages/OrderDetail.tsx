@@ -72,16 +72,30 @@ export const OrderDetail: React.FC = () => {
   }
 
   const { orderdetails: order, address } = orderData;
-  const subtotal = order.orderitems.reduce((s: number, i: any) => s + i.quantity * i.price, 0);
-  const shipping = order.shippingprice || 0;
-  const total = subtotal + shipping;
+  const subtotal = Number(order.subtotal) || 0;
+  const shipping = Number(order.shippingprice) || 0;
+  const discountprice = Number(order.discountprice) || 0;
+  const total = Number(order.totalamount) || 0;
+  const couponcode = order.couponcode;
   const statusIndex = ORDER_STATUSES.indexOf(orderStatus);
   const isCancelled = orderStatus === 'cancelled';
 
-  const handleSave = () => {
-    // Usually you'd call an API here like: await authService.updateOrderStatus(order.orderid, orderStatus)
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
+  const handleSave = async () => {
+    try {
+      await authService.updateOrderStatus(order.orderid, orderStatus);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
+      
+      setOrderData((prev: any) => ({
+        ...prev,
+        orderdetails: {
+          ...prev.orderdetails,
+          orderstatus: orderStatus
+        }
+      }));
+    } catch (err) {
+      console.error("Failed to update order status", err);
+    }
   };
 
   return (
@@ -204,9 +218,15 @@ export const OrderDetail: React.FC = () => {
                   <span>Subtotal</span>
                   <span className="font-medium text-dark-brown-700">₹{subtotal.toLocaleString()}</span>
                 </div>
+                {discountprice > 0 && (
+                  <div className="flex justify-between text-sm text-dark-brown-500">
+                    <span>Discount {couponcode && `(${couponcode})`}</span>
+                    <span className="font-medium text-green-600">-₹{discountprice.toLocaleString()}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-sm text-dark-brown-500">
                   <span>Shipping</span>
-                  <span className="font-medium text-dark-brown-700">₹{shipping}</span>
+                  <span className="font-medium text-dark-brown-700">{shipping === 0 ? 'Free' : `₹${shipping.toLocaleString()}`}</span>
                 </div>
                 <div className="flex justify-between text-base font-bold text-dark-brown-900 pt-3 border-t border-dark-brown-200">
                   <span>Grand Total</span>

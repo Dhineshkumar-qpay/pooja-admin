@@ -4,23 +4,9 @@ import { DataTable } from '../components/DataTable';
 import type { Column } from '../components/DataTable';
 import { StatusBadge } from '../components/StatusBadge';
 import { useNavigate } from 'react-router-dom';
-import { authService } from '../services/api';
+import { authService, IMAGE_BASE_URL } from '../services/api';
+import type { Order } from '../types';
 
-interface OrderItem {
-  orderitemid: string;
-  productname: string;
-  quantity: number;
-  price: number;
-}
-
-interface Order {
-  orderid: string;
-  totalamount: number;
-  paymentstatus: string;
-  orderstatus: string;
-  createdAt: string;
-  orderitems: OrderItem[];
-}
 
 export const Orders: React.FC = () => {
   const navigate = useNavigate();
@@ -57,17 +43,27 @@ export const Orders: React.FC = () => {
   });
 
   const columns: Column<Order>[] = [
-    { 
-      key: 'orderid', 
-      header: 'Order Details', 
+    {
+      key: 'orderid',
+      header: 'Order Details',
       render: (row) => (
-        <div>
-          <span className="font-medium text-dark-brown-900 block truncate max-w-[200px]" title={row.orderitems?.[0]?.productname}>
-            {row.orderitems?.[0]?.productname || "Unknown Product"} {row.orderitems?.length > 1 && `+${row.orderitems.length - 1} more`}
-          </span>
-          <span className="text-xs text-saffron-600 block">{row.orderid}</span>
+        <div className="flex items-center gap-3">
+          {row.orderitems?.[0] && row.orderitems[0].productimage ? (
+            <img 
+              src={`${IMAGE_BASE_URL}${row.orderitems[0].productimage}`} 
+              alt={row.orderitems[0].productname} 
+              className="h-10 w-10 rounded-md object-cover flex-shrink-0" 
+            />
+          ) : (
+            <div className="h-10 w-10 rounded-md bg-dark-brown-50 border border-dark-brown-100 flex-shrink-0" />
+          )}
+          <div className="flex flex-col">
+            <span className="font-medium text-dark-brown-900 block truncate max-w-[200px]" title={row.orderitems?.[0]?.productname}>
+              {row.orderitems?.[0]?.productname || "Unknown Product"} {row.orderitems?.length > 1 && `+${row.orderitems.length - 1} more`}
+            </span>
+          </div>
         </div>
-      ) 
+      )
     },
     { key: 'createdAt', header: 'Order Date', render: (row) => new Date(row.createdAt).toLocaleDateString() },
     { key: 'items', header: 'Items', render: (row) => row.orderitems?.length || 0 },
